@@ -18,6 +18,18 @@ class Restaurant extends ResourceController{
         $data['restaurants'] = $this->model->findAll();
         return $this->respond($data);
     }
+    // Get restaurant By id
+    public function show($id = null)
+    {
+        $data = $this->model->getWhere(['id'=> $id])->getResult();
+        if($data){
+            return $this->respond($data);
+        }
+        else{
+            return $this->failNotFound('No Restaurant found with id :'.$id);
+        }
+        
+    }
 }
 
 
